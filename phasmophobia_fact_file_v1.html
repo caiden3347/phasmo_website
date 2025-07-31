@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phasmophobia Ghost Fact File</title>
+    </div>
+    <style>
+        #language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        #language-dropdown {
+            padding: 8px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid #ff6b6b;
+            cursor: pointer;
+        }
+        #language-dropdown:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+    <script>
+        function changeLanguage() {
+            const selectedLanguage = document.getElementById('language-dropdown').value;
+            window.location.href = selectedLanguage;
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: #ff6b6b;
+        }
+
+        .tab:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .evidence-selector {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .evidence-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .evidence-item:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-2px);
+        }
+
+        .evidence-item.selected {
+            background: #ff6b6b;
+            border-color: #fff;
+        }
+
+        .evidence-item.ruled-out {
+            background: #333;
+            color: #999;
+            opacity: 0.5;
+        }
+
+        .possible-ghosts {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ghost-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .ghost-name {
+            font-size: 1.2em;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .ghost-evidence {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .evidence-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .ghost-info {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ghost-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .detail-title {
+            color: #ff6b6b;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .reset-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #ff5252;
+        }
+
+        .ghost-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .ghost-full-card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ff6b6b;
+        }
+
+        .secret-info {
+            background: rgba(255,107,107,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .secret-info::before {
+            content: "🔍 Secret: ";
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .hunt-info {
+            background: rgba(255,0,0,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #ff4444;
+        }
+
+        .hunt-info::before {
+            content: "⚔️ Hunt: ";
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .incense-info {
+            background: rgba(0,255,0,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #44ff44;
+        }
+
+        .incense-info::before {
+            content: "🌿 Incense: ";
+            color: #44ff44;
+            font-weight: bold;
+        }
+
+        .identification-tips {
+            background: rgba(255,255,0,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #ffff44;
+        }
+
+        .identification-tips::before {
+            content: "💡 ID Tips: ";
+            color: #ffff44;
+            font-weight: bold;
+        }
+
+        .final-ghost {
+            background: linear-gradient(45deg, #ff6b6b, #ff9999);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(255,107,107,0.3);
+        }
+
+        .final-ghost h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👻 Phasmophobia Ghost Fact File</h1>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('identifier')">Ghost Identifier</button>
+            <button class="tab" onclick="showTab('database')">Ghost Database</button>
+        </div>
+
+        <div id="identifier" class="tab-content active">
+            <div class="evidence-selector">
+                <h2>Select Evidence Found:</h2>
+                <div class="evidence-grid" id="evidenceGrid"></div>
+                <button class="reset-btn" onclick="resetEvidence()">Reset All</button>
+            </div>
+
+            <div class="possible-ghosts" id="possibleGhosts"></div>
+
+            <div id="finalGhost"></div>
+        </div>
+
+        <div id="database" class="tab-content">
+            <div class="ghost-list" id="ghostList"></div>
+        </div>
+    </div>
+
+    <script>
+        const evidenceTypes = [
+            'EMF Level 5',
+            'Ultraviolet',
+            'Ghost Writing',
+            'Spirit Box',
+            'Freezing Temperatures',
+            'DOTS Projector',
+            'Ghost Orbs'
+        ];
+
+        const ghosts = [
+            {
+                name: 'Spirit',
+                evidence: ['EMF Level 5', 'Spirit Box', 'Ghost Writing'],
+                strengths: 'Nothing',
+                weaknesses: 'Smudge Sticks are more effective, preventing hunts for 180 seconds instead of 90',
+                unique: 'Most common ghost type with no special abilities',
+                secret: 'Can be identified by process of elimination when no other ghost fits',
+                hunt: 'Hunts at 50% sanity. Standard hunt behavior with no special patterns',
+                incense: 'Prevents hunting for 180 seconds (double the normal duration)',
+                idTips: 'Often the "default" ghost when evidence is contradictory. Look for standard EMF spikes, clear spirit box responses, and neat handwriting in the book'
+            },
+            {
+                name: 'Wraith',
+                evidence: ['EMF Level 5', 'Spirit Box', 'DOTS Projector'],
+                strengths: 'Cannot be tracked by footsteps and has no footstep sounds during hunts',
+                weaknesses: 'Salt will immediately teleport it to a random location and create EMF',
+                unique: 'Teleports to random players and leaves no footstep evidence',
+                secret: 'Will never step in salt, but touching salt will cause it to teleport and create EMF Level 5',
+                hunt: 'Hunts at 50% sanity. Cannot be tracked by footsteps or UV footprints',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Place salt in doorways - if it never steps in it but EMF triggers nearby, likely a Wraith. No footstep sounds during hunts'
+            },
+            {
+                name: 'Phantom',
+                evidence: ['Spirit Box', 'Fingerprints', 'DOTS Projector'],
+                strengths: 'Looking directly at a Phantom will drop your sanity considerably faster',
+                weaknesses: 'Taking a photo of the Phantom will cause it to temporarily disappear',
+                unique: 'Disappears when photographed and drains sanity when looked at',
+                secret: 'Photo evidence of the Phantom will show as "Ghost" but the ghost will immediately disappear after the photo',
+                hunt: 'Hunts at 50% sanity. Flickers less frequently during hunts (every 1-2 seconds vs 0.3-1 second)',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Take photos during manifestations - if ghost disappears immediately, it\'s likely a Phantom. Players will lose sanity faster when looking at it'
+            },
+            {
+                name: 'Poltergeist',
+                evidence: ['Spirit Box', 'Fingerprints', 'Ghost Writing'],
+                strengths: 'Can throw multiple objects at once and affect electronics from farther away',
+                weaknesses: 'Ineffective in empty rooms with no throwable objects',
+                unique: 'Can throw multiple objects simultaneously and affects many objects at once',
+                secret: 'Can throw all objects in a room at once, creating a distinctive "explosion" of activity',
+                hunt: 'Hunts at 50% sanity. Can throw objects during hunts to confuse and disorient players',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Look for multiple objects being thrown at once, especially during events. Electronics will malfunction more frequently and from greater distances'
+            },
+            {
+                name: 'Banshee',
+                evidence: ['Fingerprints', 'Ghost Orbs', 'DOTS Projector'],
+                strengths: 'Targets only one player at a time until they leave or die',
+                weaknesses: 'Can be warded off by a Crucifix from 5 meters instead of 3',
+                unique: 'Focuses on one target and has extended Crucifix range',
+                secret: 'Parabolic Microphone will detect unique "screaming" sounds at 30Hz frequency',
+                hunt: 'Hunts at 50% sanity but will only hunt its target. If target is outside, it will wander aimlessly',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'One player will be targeted consistently - they\'ll experience more events and ghost interactions. Crucifix works from farther away'
+            },
+            {
+                name: 'Jinn',
+                evidence: ['EMF Level 5', 'Fingerprints', 'Freezing Temperatures'],
+                strengths: 'Travels faster if a player is far away and the fuse box is on',
+                weaknesses: 'Cannot turn off the fuse box directly and is slower when fuse box is off',
+                unique: 'Speed depends on fuse box status and distance to players',
+                secret: 'Will never turn off the fuse box itself, but can turn off individual lights',
+                hunt: 'Hunts at 50% sanity. Moves faster when fuse box is on and players are far away',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Turn off fuse box - if ghost becomes noticeably slower, likely a Jinn. Fuse box will never be turned off by the ghost'
+            },
+            {
+                name: 'Mare',
+                evidence: ['Spirit Box', 'Ghost Orbs', 'Ghost Writing'],
+                strengths: 'Increased chance to attack in the dark and can turn lights off immediately',
+                weaknesses: 'Less likely to attack in lit areas and hunts at lower sanity when lights are on',
+                unique: 'Light-sensitive behavior and hunting thresholds',
+                secret: 'Will immediately turn off lights when players turn them on, and prefers to hunt in complete darkness',
+                hunt: 'Hunts at 40% sanity with lights on, 60% with lights off. Faster in darkness',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Lights will turn off immediately after being turned on. More aggressive events in darkness, less active in bright areas'
+            },
+            {
+                name: 'Revenant',
+                evidence: ['Ghost Orbs', 'Ghost Writing', 'Freezing Temperatures'],
+                strengths: 'Much faster when chasing a player during hunts',
+                weaknesses: 'Very slow when not chasing anyone',
+                unique: 'Extreme speed changes based on whether it\'s actively chasing',
+                secret: 'Moves at 3x speed when chasing but 0.5x speed when not - most dramatic speed difference',
+                hunt: 'Hunts at 50% sanity. Extremely fast when chasing (3m/s) but very slow when wandering (0.5m/s)',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'During hunts, will be extremely fast when chasing but very slow when searching. Listen for rapid footsteps when being chased'
+            },
+            {
+                name: 'Shade',
+                evidence: ['EMF Level 5', 'Ghost Writing', 'Freezing Temperatures'],
+                strengths: 'Hard to find and much less active when multiple people are nearby',
+                weaknesses: 'Will not hunt if multiple people are in the same room',
+                unique: 'Shy behavior - less active and won\'t hunt with multiple people present',
+                secret: 'Activity drops significantly when multiple players are in the ghost room',
+                hunt: 'Hunts at 35% sanity, but will not hunt if multiple people are in the same room',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Very low activity with multiple people present. Send one person in alone to trigger more events. Won\'t hunt groups. A Shade also won\'t sing during ghost events.'
+            },
+            {
+                name: 'Demon',
+                evidence: ['Fingerprints', 'Ghost Writing', 'Freezing Temperatures'],
+                strengths: 'Can hunt at any sanity level and Ouija Board won\'t lower sanity',
+                weaknesses: 'Crucifix prevents hunts for 60 seconds instead of 25',
+                unique: 'Can hunt at any sanity and has extended Crucifix effectiveness',
+                secret: 'Can hunt at 100% sanity and using Ouija Board doesn\'t drain sanity',
+                hunt: 'Can hunt at any sanity level. Hunts more frequently than other ghosts',
+                incense: 'Standard 90-second hunt prevention, but Crucifix lasts 60 seconds',
+                idTips: 'Early hunts at high sanity levels. Ouija Board responses don\'t drain sanity. Very aggressive overall'
+            },
+            {
+                name: 'Yurei',
+                evidence: ['Ghost Orbs', 'Freezing Temperatures', 'DOTS Projector'],
+                strengths: 'Has a stronger effect on sanity',
+                weaknesses: 'Smudging the Yurei will cause it to not wander from its room for 90 seconds',
+                unique: 'Affects sanity more than normal and can be confined with incense',
+                secret: 'Doors closing will drain sanity, and smudging traps it in its room',
+                hunt: 'Hunts at 50% sanity. Sanity drains faster around this ghost',
+                incense: 'Standard 90-second hunt prevention, but also confines it to its room for 90 seconds',
+                idTips: 'Sanity drops faster than normal. Smudging will keep it in its room - monitor for reduced activity outside ghost room'
+            },
+            {
+                name: 'Oni',
+                evidence: ['EMF Level 5', 'Freezing Temperatures', 'DOTS Projector'],
+                strengths: 'More active when people are nearby and can move objects at great speed',
+                weaknesses: 'Being more active makes it easier to find',
+                unique: 'Very active with people nearby and moves objects violently',
+                secret: 'Will never do the "airball" ghost event (invisible pushing) - only physical manifestations',
+                hunt: 'Hunts at 50% sanity. More active during hunts, throwing objects frequently',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Very high activity when players are nearby. Objects move with great force. Never does invisible pushing events'
+            },
+            {
+                name: 'Yokai',
+                evidence: ['Spirit Box', 'Ghost Orbs', 'DOTS Projector'],
+                strengths: 'Talking near a Yokai will anger it and increase activity',
+                weaknesses: 'Can only hear voices close to it during hunts',
+                unique: 'Talking affects its behavior and hunting ability',
+                secret: 'Talking within 2 meters increases hunt chance and activity, but talking far away during hunts makes you safer',
+                hunt: 'Hunts at 50% sanity, but talking near it can trigger hunts at 80% sanity. Can only hear voices within 2 meters during hunts',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Increased activity when talking nearby. During hunts, can only hear voices very close to it. Test by talking at different distances'
+            },
+            {
+                name: 'Hantu',
+                evidence: ['Fingerprints', 'Ghost Orbs', 'Freezing Temperatures'],
+                strengths: 'Moves faster in colder areas and will have freezing breath during hunts',
+                weaknesses: 'Moves slower in warmer areas and cannot turn on the fuse box',
+                unique: 'Speed varies with temperature and shows freezing breath',
+                secret: 'Never turns on fuse box and breath is visible during hunts in cold areas',
+                hunt: 'Hunts at 50% sanity. Speed increases in cold areas (up to 2.7m/s) and decreases in warm areas. Visible freezing breath',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Never turns on fuse box. Faster in cold rooms, slower in warm rooms. Visible breath during hunts in cold areas'
+            },
+            {
+                name: 'Goryo',
+                evidence: ['EMF Level 5', 'Fingerprints', 'DOTS Projector'],
+                strengths: 'Can only be seen through DOTS when nobody is in the room',
+                weaknesses: 'Rarely leaves the area it died in',
+                unique: 'DOTS only works when room is empty and rarely changes rooms',
+                secret: 'DOTS Projector will only show the ghost when viewed through a camera and no players are in the room',
+                hunt: 'Hunts at 50% sanity. Rarely leaves its room, making it predictable',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Set up DOTS and camera in ghost room, then leave. Check camera feed - if DOTS shows through camera but not in person, it\'s Goryo'
+            },
+            {
+                name: 'Myling',
+                evidence: ['EMF Level 5', 'Fingerprints', 'Ghost Writing'],
+                strengths: 'Quieter footsteps and vocalizations during hunts',
+                weaknesses: 'Produces more sounds on the Parabolic Microphone',
+                unique: 'Quieter during hunts but louder on Parabolic Microphone',
+                secret: 'Footsteps can only be heard from 12 meters away instead of 20 meters during hunts',
+                hunt: 'Hunts at 50% sanity. Footsteps and voice are much quieter during hunts',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Use Parabolic Microphone for more frequent sound detection, the myling will make a second sound 80s after the first. During hunts, footsteps are much quieter than normal'
+            },
+            {
+                name: 'Onryo',
+                evidence: ['Spirit Box', 'Ghost Orbs', 'Freezing Temperatures'],
+                strengths: 'Blowing out flames can cause it to attack',
+                weaknesses: 'Presence of flames reduces the chance of a hunt',
+                unique: 'Fire-based mechanics affect hunting behavior',
+                secret: 'Blowing out 3 flames will trigger a hunt regardless of sanity. Lit candles prevent hunting',
+                hunt: 'Hunts at 60% sanity normally, but blowing out flames can trigger hunts at any sanity. Lit flames reduce hunt chance',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Keep candles/lighters lit to reduce hunt chance. Avoid blowing out flames. Monitor flame status carefully'
+            },
+            {
+                name: 'The Twins',
+                evidence: ['EMF Level 5', 'Spirit Box', 'Freezing Temperatures'],
+                strengths: 'Can be in two places at once and one twin moves faster',
+                weaknesses: 'Will often interact with the environment at the same time',
+                unique: 'Two separate entities with different speeds and behaviors',
+                secret: 'EMF readings and interactions can happen simultaneously in different locations',
+                hunt: 'Hunts at 50% sanity. One twin is faster (110% speed), one is slower (90% speed). Can start hunts from different locations',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Look for simultaneous interactions in different areas. EMF readings in multiple locations at once. Different chase speeds during hunts'
+            },
+            {
+                name: 'Raiju',
+                evidence: ['EMF Level 5', 'Ghost Orbs', 'DOTS Projector'],
+                strengths: 'Moves faster near electrical equipment and can disrupt electronics from farther away',
+                weaknesses: 'Disrupts electronics when it moves, giving away its position',
+                unique: 'Speed and abilities enhanced by electronics',
+                secret: 'Moves 50% faster near active electronics and can disrupt them from 15 meters away',
+                hunt: 'Hunts at 65% sanity near electronics, 50% otherwise. Moves faster during hunts near electronics',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Turn off electronics to slow it down. Electronics malfunction from farther away. Faster near turned-on equipment'
+            },
+            {
+                name: 'Obake',
+                evidence: ['EMF Level 5', 'Fingerprints', 'Ghost Orbs'],
+                strengths: 'Can shapeshift and leave special fingerprints',
+                weaknesses: 'Sometimes leaves unique fingerprints that can identify it',
+                unique: 'Can shapeshift and has special fingerprint evidence',
+                secret: 'Can leave 6-fingered handprints and has a 25% chance to leave no fingerprints at all',
+                hunt: 'Hunts at 50% sanity. Can shapeshift during hunts, changing its appearance',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Look for 6-fingered handprints or surfaces that should have prints but don\'t. May appear different during hunts'
+            },
+            {
+                name: 'The Mimic',
+                evidence: ['Spirit Box', 'Fingerprints', 'Freezing Temperatures', 'Ghost Orbs'],
+                strengths: 'Can mimic the abilities and traits of other ghosts',
+                weaknesses: 'Always has Ghost Orbs as a fourth evidence',
+                unique: 'Copies other ghost behaviors and always has 4 evidence types',
+                secret: 'Always shows Ghost Orbs as a bonus 4th evidence. Can mimic any ghost ability',
+                hunt: 'Hunts at 50% sanity but can copy other ghosts\' hunt behaviors. Always has Ghost Orbs',
+                incense: 'Standard 90-second hunt prevention, but can mimic other ghosts\' incense interactions',
+                idTips: 'If you find 4 evidence types including Ghost Orbs, it\'s The Mimic. May exhibit behaviors from multiple ghost types'
+            },
+            {
+                name: 'Moroi',
+                evidence: ['Spirit Box', 'Ghost Writing', 'Freezing Temperatures'],
+                strengths: 'Moves faster at lower sanity levels and drains sanity when using cursed objects',
+                weaknesses: 'Smudging blinds the Moroi during hunts',
+                unique: 'Speed increases as sanity decreases and cursed objects drain sanity',
+                secret: 'Speed scales with sanity loss - can become extremely fast at very low sanity',
+                hunt: 'Hunts at 50% sanity. Speed increases as average sanity decreases. Smudging blinds it during hunts',
+                incense: 'Standard 90-second hunt prevention, but also blinds the Moroi during hunts',
+                idTips: 'Becomes faster as team sanity drops. Cursed objects drain more sanity. Smudging during hunts makes it lose track of players'
+            },
+            {
+                name: 'Deogen',
+                evidence: ['Spirit Box', 'Ghost Writing', 'DOTS Projector'],
+                strengths: 'Always knows where players are and can sense players through walls',
+                weaknesses: 'Moves slower when close to players',
+                unique: 'Always knows player locations but slows down when close',
+                secret: 'Moves at 3m/s when far from players but only 0.4m/s when within 6 meters',
+                hunt: 'Hunts at 40% sanity. Always knows player locations but becomes very slow when close',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Never loses track of players during hunts. Becomes very slow when close - use this to loop around it'
+            },
+            {
+                name: 'Thaye',
+                evidence: ['Ghost Orbs', 'Ghost Writing', 'DOTS Projector'],
+                strengths: 'Very active and fast when players first enter, can hunt at higher sanity',
+                weaknesses: 'Becomes slower and less active over time',
+                unique: 'Ages over time, becoming less dangerous but easier to find',
+                secret: 'Ages every 1-2 minutes players are nearby, becoming progressively weaker',
+                hunt: 'Hunts at 75% sanity when young, decreasing to 15% when old. Speed decreases with age',
+                incense: 'Standard 90-second hunt prevention',
+                idTips: 'Very active and dangerous initially. Wait in the area to age it - it will become slower and less aggressive over time'
+            }
+        ];
+
+        let selectedEvidence = [];
+        let possibleGhosts = [...ghosts];
+
+        function initializeApp() {
+            createEvidenceGrid();
+            updatePossibleGhosts();
+            createGhostDatabase();
+        }
+
+        function createEvidenceGrid() {
+            const grid = document.getElementById('evidenceGrid');
+            grid.innerHTML = '';
+            
+            evidenceTypes.forEach(evidence => {
+                const item = document.createElement('div');
+                item.className = 'evidence-item';
+                item.textContent = evidence;
+                item.onclick = () => toggleEvidence(evidence, item);
+                grid.appendChild(item);
+            });
+        }
+
+        function toggleEvidence(evidence, element) {
+            if (selectedEvidence.includes(evidence)) {
+                selectedEvidence = selectedEvidence.filter(e => e !== evidence);
+                element.classList.remove('selected');
+            } else if (selectedEvidence.length < 3) {
+                selectedEvidence.push(evidence);
+                element.classList.add('selected');
+            }
+            
+            updatePossibleGhosts();
+        }
+
+        function updatePossibleGhosts() {
+            possibleGhosts = ghosts.filter(ghost => {
+                return selectedEvidence.every(evidence => ghost.evidence.includes(evidence));
+            });
+
+            const container = document.getElementById('possibleGhosts');
+            const finalContainer = document.getElementById('finalGhost');
+            
+            if (selectedEvidence.length === 0) {
+                container.innerHTML = '<h3>Select evidence to narrow down ghost types</h3>';
+                finalContainer.innerHTML = '';
+                return;
+            }
+
+            if (possibleGhosts.length === 1) {
+                const ghost = possibleGhosts[0];
+                finalContainer.innerHTML = `
+                    <div class="final-ghost">
+                        <h2>👻 ${ghost.name}</h2>
+                        <p><strong>Evidence:</strong> ${ghost.evidence.join(', ')}</p>
+                        <div class="secret-info">${ghost.secret}</div>
+                        <div class="hunt-info">${ghost.hunt}</div>
+                        <div class="incense-info">${ghost.incense}</div>
+                        <div class="identification-tips">${ghost.idTips}</div>
+                    </div>
+                `;
+                container.innerHTML = '';
+                return;
+            }
+
+            if (possibleGhosts.length === 0) {
+                container.innerHTML = '<h3>❌ No ghosts match this evidence combination</h3>';
+                finalContainer.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = `
+                <h3>Possible Ghosts (${possibleGhosts.length}):</h3>
+                ${possibleGhosts.map(ghost => `
+                    <div class="ghost-card">
+                        <div class="ghost-name">${ghost.name}</div>
+                        <div class="ghost-evidence">
+                            ${ghost.evidence.map(e => `<span class="evidence-tag ${selectedEvidence.includes(e) ? 'selected' : ''}">${e}</span>`).join('')}
+                        </div>
+                        <div class="secret-info">${ghost.secret}</div>
+                    </div>
+                `).join('')}
+            `;
+            finalContainer.innerHTML = '';
+        }
+
+        function resetEvidence() {
+            selectedEvidence = [];
+            document.querySelectorAll('.evidence-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            updatePossibleGhosts();
+        }
+
+        function createGhostDatabase() {
+            const container = document.getElementById('ghostList');
+            container.innerHTML = ghosts.map(ghost => `
+                <div class="ghost-full-card">
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">${ghost.name}</h3>
+                    
+                    <div class="detail-card">
+                        <div class="detail-title">Evidence Required</div>
+                        <div class="ghost-evidence">
+                            ${ghost.evidence.map(e => `<span class="evidence-tag">${e}</span>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <div class="detail-title">Strengths</div>
+                        <p>${ghost.strengths}</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <div class="detail-title">Weaknesses</div>
+                        <p>${ghost.weaknesses}</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <div class="detail-title">Unique Ability</div>
+                        <p>${ghost.unique}</p>
+                    </div>
+                    
+                    <div class="secret-info">${ghost.secret}</div>
+                    <div class="hunt-info">${ghost.hunt}</div>
+                    <div class="incense-info">${ghost.incense}</div>
+                    <div class="identification-tips">${ghost.idTips}</div>
+                </div>
+            `).join('');
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Initialize the app when the page loads
+        window.onload = initializeApp;
+    </script>
+</body>
+</html>
