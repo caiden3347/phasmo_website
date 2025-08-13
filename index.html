@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investigation Underway...</title>
+    <title>Phasmophobia Fact File</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Butcherman&family=Chiller&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -14,299 +13,1446 @@
         }
 
         body {
-            background: linear-gradient(45deg, #000000, #0a0a0a, #050505);
-            background-size: 400% 400%;
-            animation: backgroundShift 20s ease infinite;
-            font-family: 'Courier New', cursive;
-            color: #ffffff;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        @keyframes backgroundShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.08;
-            z-index: 1;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter></defs><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.4"/></svg>');
-            animation: noiseMove 0.2s infinite linear;
-        }
-
-        @keyframes noiseMove {
-            0% { transform: translate(0, 0); }
-            10% { transform: translate(-5%, -5%); }
-            20% { transform: translate(-10%, 5%); }
-            30% { transform: translate(5%, -10%); }
-            40% { transform: translate(-5%, 15%); }
-            50% { transform: translate(-10%, 5%); }
-            60% { transform: translate(15%, 0); }
-            70% { transform: translate(0, 10%); }
-            80% { transform: translate(-15%, 0); }
-            90% { transform: translate(10%, 5%); }
-            100% { transform: translate(5%, 0); }
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            background-attachment: fixed;
         }
 
         .container {
-            position: relative;
-            z-index: 10;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
 
-        .glitch {
-            font-size: 3.5rem;
-            font-weight: 900;
-            font-family: 'Courier New', cursive;
-            text-transform: uppercase;
-            position: relative;
-            color: #ffffff;
-            margin-bottom: 20px;
-            animation: flicker 2s infinite alternate;
-            text-shadow: 2px 2px 4px #000000;
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
         }
 
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                text-shadow: 
-                    0 0 5px #ffffff,
-                    0 0 10px #ffffff,
-                    0 0 15px #ffffff,
-                    0 0 20px #ffffff,
-                    2px 2px 4px #000000;
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                text-shadow: 2px 2px 4px #000000;
-                opacity: 0.3;
-            }
+        .language-selector select {
+            background: #222;
+            color: #fff;
+            border: 2px solid #444;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: inherit;
+            cursor: pointer;
         }
 
-        .glitch::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            color: #ff4444;
-            z-index: -1;
-            animation: glitchSkew 1s infinite linear alternate-reverse;
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            color: #4444ff;
-            z-index: -2;
-            animation: glitchSkew 1s infinite linear alternate-reverse;
-            animation-delay: 0.2s;
+        .header h1 {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
         }
 
-        @keyframes glitchSkew {
-            0% {
-                transform: translate(0);
-            }
-            10% {
-                transform: translate(-2px, -2px);
-            }
-            20% {
-                transform: translate(-4px, 0px);
-            }
-            30% {
-                transform: translate(2px, -2px);
-            }
-            40% {
-                transform: translate(-1px, 1px);
-            }
-            50% {
-                transform: translate(3px, 0px);
-            }
-            60% {
-                transform: translate(-2px, 1px);
-            }
-            70% {
-                transform: translate(0px, -2px);
-            }
-            80% {
-                transform: translate(1px, 0px);
-            }
-            90% {
-                transform: translate(2px, 1px);
-            }
-            100% {
-                transform: translate(0);
-            }
+        .header p {
+            font-size: 1.2em;
+            color: #bbb;
+            font-style: italic;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            font-family: 'Courier New', cursive;
-            color: #cccccc;
+        .tabs {
+            display: flex;
+            justify-content: center;
             margin-bottom: 30px;
-            animation: pulse 3s infinite;
-            text-shadow: 1px 1px 2px #000000;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+        .tab {
+            background: #222;
+            color: #fff;
+            border: 2px solid #444;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 16px;
         }
 
-        .status-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #ffffff;
+        .tab:hover {
+            background: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .tab.active {
+            background: #444;
+            border-color: #666;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #333;
             border-radius: 10px;
             padding: 30px;
-            box-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.1),
-                inset 0 0 20px rgba(255, 255, 255, 0.03);
-            animation: borderGlow 2s ease-in-out infinite alternate;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes borderGlow {
-            from {
-                box-shadow: 
-                    0 0 20px rgba(255, 255, 255, 0.1),
-                    inset 0 0 20px rgba(255, 255, 255, 0.03);
-            }
-            to {
-                box-shadow: 
-                    0 0 30px rgba(255, 255, 255, 0.2),
-                    inset 0 0 25px rgba(255, 255, 255, 0.06);
-            }
+        .tab-content.active {
+            display: block;
         }
 
-        .message {
-            font-size: 1.4rem;
+        .evidence-selector {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #333;
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 1px 1px 2px #000000;
         }
 
-        .warning {
-            font-size: 0.9rem;
-            color: #ffaa00;
-            margin-top: 15px;
-            animation: warningBlink 1.5s infinite;
+        .evidence-item {
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
-        @keyframes warningBlink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.3; }
+        .evidence-item:hover {
+            border-color: #666;
+            background: #2a2a2a;
         }
 
-        .dots {
-            display: inline-block;
-            animation: dotPulse 2s infinite;
+        .evidence-item.selected {
+            background: #333;
+            border-color: #fff;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        @keyframes dotPulse {
-            0%, 20% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+        .result {
+            background: #1a1a1a;
+            border: 2px solid #444;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
         }
 
-        .dots:nth-child(2) { animation-delay: 0.2s; }
-        .dots:nth-child(3) { animation-delay: 0.4s; }
+        .ghost-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
 
-        .scanner {
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .ghost-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .ghost-card:hover {
+            border-color: #555;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .ghost-name {
+            font-size: 1.8em;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .ghost-section {
+            margin-bottom: 15px;
+        }
+
+        .ghost-section h4 {
+            color: #ccc;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+
+        .evidence-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .evidence-badge {
+            background: #333;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            border: 1px solid #555;
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .map-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .map-card:hover {
+            border-color: #555;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .map-name {
+            font-size: 1.5em;
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .cursed-objects {
+            background: #222;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .object-location {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            border-left: 3px solid #666;
+        }
+
+        .object-type {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .cursed-locations {
+            background: #222;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .clear-btn {
+            background: #444;
+            color: #fff;
+            border: 2px solid #666;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: #555;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .search-container {
+            margin-bottom: 25px;
+        }
+
+        .search-input {
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffffff, transparent);
-            animation: scan 3s ease-in-out infinite;
+            padding: 15px;
+            font-size: 16px;
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            font-family: inherit;
         }
 
-        @keyframes scan {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        .search-input:focus {
+            outline: none;
+            border-color: #666;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
-        @media (max-width: 768px) {
-            .glitch {
-                font-size: 2.5rem;
-            }
-            .message {
-                font-size: 1.1rem;
-            }
-            .status-box {
-                padding: 20px;
-            }
+        .cursed-object-details {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .tarot-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tarot-card {
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .tarot-card:hover {
+            border-color: #666;
+            background: #2a2a2a;
+        }
+
+        .tarot-card h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+
+        .tarot-description {
+            color: #bbb;
+            font-size: 0.9em;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .probability {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        .card-appearance {
+            color: #ff9800;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        .update-notice {
+            background: #2a5298;
+            border: 2px solid #4a7bc8;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .update-notice h3 {
+            margin-bottom: 10px;
+            color: #87ceeb;
         }
     </style>
 </head>
+
 <body>
-    <div class="noise"></div>
-    <div class="scanner"></div>
-    
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+        </select>
+    </div>
+
     <div class="container">
-        <h1 class="glitch" data-text="WEBSITE UPDATE IN PROGRESS">WEBSITE UPDATE IN PROGRESS</h1>
-        
-        <p class="subtitle">New Phasmophobia Content Detected</p>
-        
-        <div class="status-box">
-            <div class="message">
-                Site reconstruction underway<span class="dots">.</span><span class="dots">.</span><span class="dots">.</span>
+        <div class="header">
+            <h1 data-translate="title">Phasmophobia Fact File</h1>
+            <p data-translate="subtitle">Your ultimate guide to ghost hunting</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('evidence')" data-translate="tab-evidence">Evidence Finder</button>
+            <button class="tab" onclick="showTab('ghosts')" data-translate="tab-ghosts">Ghost Database</button>
+            <button class="tab" onclick="showTab('maps')" data-translate="tab-maps">Cursed Objects</button>
+        </div>
+
+        <div id="evidence" class="tab-content active">
+            <div class="evidence-selector">
+                <h2 data-translate="evidence-title">Select Evidence</h2>
+                <p data-translate="evidence-subtitle">Click on the evidence you've found to identify the ghost</p>
+                <div class="evidence-grid">
+                    <div class="evidence-item" onclick="toggleEvidence(this, 'emf')" data-translate="evidence-emf">EMF Level 5</div>
+                    <div class="evidence-item" onclick="toggleEvidence(this, 'dots')" data-translate="evidence-dots">D.O.T.S Projector</div>
+                    <div class="evidence-item" onclick="toggleEvidence(this, 'uv')" data-translate="evidence-uv">Ultraviolet</div>
+                    <div class="evidence-item" onclick="toggleEvidence(this, 'freezing')" data-translate="evidence-freezing">Freezing Temperatures</div>
+                    <div class="evidence-item" onclick="toggleEvidence(this, 'orbs')" data-translate="evidence-orbs">Ghost Orbs</div>
+                    <div class="evidence-item" onclick="toggleEvidence(this, 'writing')" data-translate="evidence-writing">Ghost Writing</div>
+                    <div class="evidence-item" onclick="toggleEvidence(this, 'spiritbox')" data-translate="evidence-spiritbox">Spirit Box</div>
+                </div>
+                <button class="clear-btn" onclick="clearEvidence()" data-translate="clear-evidence">Clear All</button>
             </div>
-            <div class="message">
-                Updating to reflect the latest Phasmophobia changes
+            <div class="result" id="ghostResult">
+                <h3 data-translate="result-title">Select evidence to identify the ghost</h3>
             </div>
-            <div class="message">
-                Please check back soon for fresh paranormal content
+        </div>
+
+        <div id="ghosts" class="tab-content">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search ghosts..." id="ghostSearch" oninput="searchGhosts()" data-translate-placeholder="search-ghosts">
             </div>
-            <div class="warning">
-                ⚠️ Equipment calibration in progress - temporary downtime expected ⚠️
+            <div class="ghost-grid" id="ghostGrid">
+                <!-- Ghost cards will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div id="maps" class="tab-content">
+            <div class="update-notice">
+                <h3 data-translate="update-notice-title">🔄 Recent Update</h3>
+                <p data-translate="update-notice-text">Grafton Farmhouse received a complete rework on August 12, 2025. All cursed object locations have been updated with the latest information!</p>
+            </div>
+
+            <div class="cursed-object-details">
+                <h2 data-translate="cursed-objects-title">Cursed Objects</h2>
+                <p data-translate="cursed-objects-description">These supernatural items can be found on maps and provide powerful but dangerous interactions.</p>
+            </div>
+
+            <div class="map-grid" id="mapGrid">
+                <!-- Map cards will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
     <script>
-        // Random screen flicker effect
-        function randomFlicker() {
-            const body = document.body;
-            if (Math.random() < 0.1) {
-                body.style.filter = 'brightness(0.3) contrast(1.5)';
-                setTimeout(() => {
-                    body.style.filter = 'brightness(1) contrast(1)';
-                }, 50 + Math.random() * 100);
+        let selectedEvidence = [];
+        let currentLanguage = 'en';
+
+        const translations = {
+            en: {
+                'title': 'Phasmophobia Fact File',
+                'subtitle': 'Your ultimate guide to ghost hunting',
+                'tab-evidence': 'Evidence Finder',
+                'tab-ghosts': 'Ghost Database',
+                'tab-maps': 'Cursed Objects',
+                'evidence-title': 'Select Evidence',
+                'evidence-subtitle': 'Click on the evidence you\'ve found to identify the ghost',
+                'evidence-emf': 'EMF Level 5',
+                'evidence-dots': 'D.O.T.S Projector',
+                'evidence-uv': 'Ultraviolet',
+                'evidence-freezing': 'Freezing Temperatures',
+                'evidence-orbs': 'Ghost Orbs',
+                'evidence-writing': 'Ghost Writing',
+                'evidence-spiritbox': 'Spirit Box',
+                'clear-evidence': 'Clear All',
+                'result-title': 'Select evidence to identify the ghost',
+                'cursed-objects-title': 'Cursed Objects',
+                'cursed-objects-description': 'These supernatural items can be found on maps and provide powerful but dangerous interactions.',
+                'search-ghosts': 'Search ghosts...',
+                'ghost-evidence': 'Evidence',
+                'ghost-description': 'Description',
+                'ghost-strengths': 'Strengths',
+                'ghost-weaknesses': 'Weaknesses',
+                'ghost-tips': 'Pro Tips',
+                'ghost-hunting': 'Hunting Pattern',
+                'cursed-object-types': 'Cursed Object Types',
+                'tarot-effects': 'Tarot Card Effects',
+                'object-locations': 'Possible Cursed Object Locations',
+                'update-notice-title': 'Recent Update',
+                'update-notice-text': 'Grafton Farmhouse received a complete rework on August 12, 2025. All cursed object locations have been updated with the latest information!',
+                'card-appearance': 'Card appearance:',
+                'probability': 'Draw chance:'
+            },
+            fr: {
+                'title': 'Guide Phasmophobia',
+                'subtitle': 'Votre guide ultime pour la chasse aux fantômes',
+                'tab-evidence': 'Détecteur de Preuves',
+                'tab-ghosts': 'Base de Données des Fantômes',
+                'tab-maps': 'Objets Maudits',
+                'evidence-title': 'Sélectionner les Preuves',
+                'evidence-subtitle': 'Cliquez sur les preuves que vous avez trouvées pour identifier le fantôme',
+                'evidence-emf': 'EMF Niveau 5',
+                'evidence-dots': 'Projecteur D.O.T.S',
+                'evidence-uv': 'Ultraviolet',
+                'evidence-freezing': 'Températures Glaciales',
+                'evidence-orbs': 'Orbes Spectraux',
+                'evidence-writing': 'Écriture Fantôme',
+                'evidence-spiritbox': 'Boîte à Esprits',
+                'clear-evidence': 'Tout Effacer',
+                'result-title': 'Sélectionnez des preuves pour identifier le fantôme',
+                'cursed-objects-title': 'Objets Maudits',
+                'cursed-objects-description': 'Ces objets surnaturels peuvent être trouvés sur les cartes et offrent des interactions puissantes mais dangereuses.',
+                'search-ghosts': 'Rechercher des fantômes...',
+                'ghost-evidence': 'Preuves',
+                'ghost-description': 'Description',
+                'ghost-strengths': 'Forces',
+                'ghost-weaknesses': 'Faiblesses',
+                'ghost-tips': 'Conseils Pro',
+                'ghost-hunting': 'Modèle de Chasse',
+                'cursed-object-types': 'Types d\'Objets Maudits',
+                'tarot-effects': 'Effets des Cartes de Tarot',
+                'object-locations': 'Emplacements Possibles d\'Objets Maudits',
+                'update-notice-title': 'Mise à Jour Récente',
+                'update-notice-text': 'Grafton Farmhouse a reçu une refonte complète le 12 août 2025. Tous les emplacements d\'objets maudits ont été mis à jour avec les dernières informations !',
+                'card-appearance': 'Apparence de la carte :',
+                'probability': 'Chance de tirage :'
             }
+        };
+
+        const cursedObjects = {
+            "Tarot Cards": {
+                description: "Random effects when drawn, can be beneficial or harmful",
+                effects: [
+                    { name: "The Tower", effect: "Ghost interaction at location", chance: "20%", appearance: "Shows a tall stone tower being struck by lightning" },
+                    { name: "The Wheel of Fortune", effect: "+ or - 25% sanity", chance: "20%", appearance: "Features a large spinning wheel with mystical symbols" },
+                    { name: "The Fool", effect: "Ghost mistakes you for another player", chance: "17%", appearance: "Shows a jester figure walking off a cliff" },
+                    { name: "Death", effect: "Triggers a cursed hunt", chance: "10%", appearance: "Depicts a skeleton in black robes holding a scythe" },
+                    { name: "The Hermit", effect: "Teleports ghost back to ghost room", chance: "10%", appearance: "Shows an old man with a lantern in solitude" },
+                    { name: "The Devil", effect: "Ghost interaction in ghost room", chance: "10%", appearance: "Features a horned demon figure with chains" },
+                    { name: "The Moon", effect: "Drops sanity to 0%", chance: "5%", appearance: "Shows a crescent moon with a face and two towers" },
+                    { name: "The Sun", effect: "Fully restores sanity", chance: "5%", appearance: "Depicts a bright sun with a smiling face and rays" },
+                    { name: "The Hanged Man", effect: "Instantly kills you", chance: "1%", appearance: "Shows a figure hanging upside down from a tree" },
+                    { name: "The High Priestess", effect: "Revives a dead teammate", chance: "2%", appearance: "Features a robed woman sitting between two pillars" }
+                ]
+            }
+        };
+
+        const cursedObjectsTranslations = {
+            fr: {
+                "Tarot Cards": {
+                    description: "Effets aléatoires lors du tirage, peuvent être bénéfiques ou nuisibles",
+                    effects: [
+                        { name: "La Tour", effect: "Interaction fantôme à l'emplacement", chance: "20%", appearance: "Montre une haute tour de pierre frappée par la foudre" },
+                        { name: "La Roue de Fortune", effect: "+ ou - 25% de sanité mentale", chance: "20%", appearance: "Présente une grande roue tournante avec des symboles mystiques" },
+                        { name: "Le Fou", effect: "Le fantôme vous confond avec un autre joueur", chance: "17%", appearance: "Montre un bouffon marchant au bord d'une falaise" },
+                        { name: "La Mort", effect: "Déclenche une chasse maudite", chance: "10%", appearance: "Représente un squelette en robe noire tenant une faux" },
+                        { name: "L'Ermite", effect: "Téléporte le fantôme dans sa chambre", chance: "10%", appearance: "Montre un vieil homme avec une lanterne en solitude" },
+                        { name: "Le Diable", effect: "Interaction fantôme dans la chambre du fantôme", chance: "10%", appearance: "Présente une figure démoniaque cornue avec des chaînes" },
+                        { name: "La Lune", effect: "Réduit la sanité mentale à 0%", chance: "5%", appearance: "Montre un croissant de lune avec un visage et deux tours" },
+                        { name: "Le Soleil", effect: "Restaure complètement la sanité mentale", chance: "5%", appearance: "Représente un soleil brillant avec un visage souriant et des rayons" },
+                        { name: "Le Pendu", effect: "Vous tue instantanément", chance: "1%", appearance: "Montre une figure pendue la tête en bas à un arbre" },
+                        { name: "La Grande Prêtresse", effect: "Ressuscite un coéquipier mort", chance: "2%", appearance: "Présente une femme en robe assise entre deux piliers" }
+                    ]
+                }
+            }
+        };
+
+        const mapLocations = {
+            "Bleasdale Farmhouse": {
+                "Tarot Cards": "On a desk in the office (first room on the left when entering)",
+                "Ouija Board": "In the garage on a wooden workbench (sometimes with a hammer on top)",
+                "Music Box": "On a small wooden table in the living room (directly in front when entering)",
+                "Monkey Paw": "In the master bedroom on a leather chest next to the crib (second floor)",
+                "Haunted Mirror": "On the wall in the office next to the floor lamp and window",
+                "Summoning Circle": "In the attic on the floor next to brown boxes with cans",
+                "Voodoo Doll": "On a brown leather seat opposite bedrooms next to attic stairs (second floor)"
+            },
+            "Brownstone High School": {
+                "Tarot Cards": "On a long wooden bench to your left in the lobby next to a green book",
+                "Ouija Board": "On the floor next to a pillar on the left where lobby joins corridor",
+                "Music Box": "On a long wooden bench on the right side of lobby among green books",
+                "Monkey Paw": "On top of a cardboard box on the right side of lobby next to a brick pillar",
+                "Haunted Mirror": "Propped against a brick pillar on the right side of lobby",
+                "Summoning Circle": "On the floor in the center of corridor where lobby joins",
+                "Voodoo Doll": "On a wooden bench on the wall opposite the entrance"
+            },
+            "Camp Woodwind": {
+                "Tarot Cards": "On the left-most picnic bench next to two blue books",
+                "Ouija Board": "Inside white tent with outdoor games on the table (right side)",
+                "Music Box": "Inside yellow tent on a small white table (left side)",
+                "Monkey Paw": "On wooden platform next to purple tent with marshmallows on sticks",
+                "Haunted Mirror": "On ground next to fairy light tree and cornhole board (center)",
+                "Summoning Circle": "On ground in center of white tent with food and drinks",
+                "Voodoo Doll": "On ground next to smaller blue tent left of big red tent"
+            },
+            "Edgefield Road": {
+                "Tarot Cards": "On white dresser to your right when entering next to green dish",
+                "Ouija Board": "On ground in utility room (back-left corner first floor)",
+                "Music Box": "On white dresser in living room next to green bowl and lamp",
+                "Monkey Paw": "On blue and pink changing table in orange bedroom (second floor)",
+                "Haunted Mirror": "Hanging on wall next to stairs as you enter",
+                "Summoning Circle": "In basement between stacks of shelves",
+                "Voodoo Doll": "On bed in blue bedroom (second floor, left at top of stairs)"
+            },
+            "Grafton Farmhouse": {
+                "Monkey Paw": "On a table in the dining room (first floor, straight from entrance)",
+                "Tarot Cards": "On a desk in the library (first floor, through dining room, left door obscured by tall shelf)",
+                "Voodoo Doll": "On a table in the seamstress's workshop (first floor, right from dining room)",
+                "Summoning Circle": "On the ground in the doll room (second floor, right from stairs, end of hall)",
+                "Haunted Mirror": "On a table in the master bedroom (second floor, left from stairs, end of hall)",
+                "Music Box": "On an end table in the small bedroom (second floor, right from stairs, through door)",
+                "Ouija Board": "On the ground in the attic (third floor, up stairs from second floor small bedroom)"
+            },
+            "Maple Lodge Campsite": {
+                "Tarot Cards": "On small metal table outside white tent (North path) next to red flask",
+                "Ouija Board": "On shelf in cleaning closet (center of bathroom block)",
+                "Music Box": "On small metal table outside main log cabin door",
+                "Monkey Paw": "On blue camping chair at the end of the pier",
+                "Haunted Mirror": "On ground inside blue tent (left side when entering)",
+                "Summoning Circle": "On floor in living room of log cabin",
+                "Voodoo Doll": "Next to log surrounding campfire (left side of map)"
+            },
+            "Prison": {
+                "Tarot Cards": "Inside grey plastic box on desk in security checkpoint",
+                "Ouija Board": "On floor behind desks in security checkpoint",
+                "Music Box": "Inside left grey plastic box on desk with two boxes (security area)",
+                "Monkey Paw": "On desk next to big scanner, right of grey plastic box",
+                "Haunted Mirror": "Underneath white chairs in main entrance",
+                "Summoning Circle": "On ground at end of entrance corridor next to white chairs",
+                "Voodoo Doll": "On desk next to red scanner, left of grey plastic box"
+            },
+            "Ridgeview Court": {
+                "Tarot Cards": "On white dresser to your right when entering, right of green bowl",
+                "Ouija Board": "On shelves in utility closet (through dining room, left door)",
+                "Music Box": "On chest of drawers by door in furthest bedroom from stairs (second floor)",
+                "Monkey Paw": "On white desk with laptop and green book (second floor right corner)",
+                "Haunted Mirror": "Above dresser on wall opposite basement stairs",
+                "Summoning Circle": "In basement directly opposite the door",
+                "Voodoo Doll": "On blue-padded bench next to piano in office opposite garage"
+            },
+            "Sunny Meadows": {
+                "Tarot Cards": "In red circle on raised area closest to railings (chapel)",
+                "Ouija Board": "On ground by railings furthest from door (chapel upper area)",
+                "Music Box": "On ground in front of wooden candle stands (chapel back-left)",
+                "Monkey Paw": "On base of red metal post in center of upper deck (chapel)",
+                "Haunted Mirror": "In red circle in front of candle stands (chapel bottom-right)",
+                "Summoning Circle": "In large red circle in center of upper deck (chapel)",
+                "Voodoo Doll": "On ground in blood in front of red metal post (chapel)"
+            },
+            "Tanglewood Drive": {
+                "Tarot Cards": "On small circle table by window in living room near TV",
+                "Ouija Board": "On small wooden table in back corner of basement",
+                "Music Box": "On shelf next to teddy bear by nursery door (left from entrance)",
+                "Monkey Paw": "Inside big white cabinet in dining room area",
+                "Haunted Mirror": "On wall next to bedroom door near living room",
+                "Summoning Circle": "In center of basement room (turn right)",
+                "Voodoo Doll": "On lid of plastic storage bin closest to corner (garage)"
+            },
+            "Willow Street": {
+                "Tarot Cards": "On small circle table next to TV remote by sofa (right when entering)",
+                "Ouija Board": "On top of washing machine in small utility room (garage side room)",
+                "Music Box": "On white dresser with plant (left in living room from front door)",
+                "Monkey Paw": "In white cabinet in hallway before bedrooms (first floor)",
+                "Haunted Mirror": "On floor in small garage side room (right side)",
+                "Summoning Circle": "In basement next to mannequin in front of first door",
+                "Voodoo Doll": "On bottom shelf of white cabinet in bedroom at end of right hallway"
+            }
+        };
+
+        const mapLocationsTranslations = {
+            fr: {
+                "Bleasdale Farmhouse": {
+                    "Tarot Cards": "Sur un bureau dans le bureau (première pièce à gauche en entrant)",
+                    "Ouija Board": "Dans le garage sur un établi en bois (parfois avec un marteau dessus)",
+                    "Music Box": "Sur une petite table en bois dans le salon (directement en face en entrant)",
+                    "Monkey Paw": "Dans la chambre principale sur un coffre en cuir à côté du berceau (deuxième étage)",
+                    "Haunted Mirror": "Au mur dans le bureau à côté de la lampadaire et de la fenêtre",
+                    "Summoning Circle": "Dans le grenier au sol à côté des boîtes brunes avec des canettes",
+                    "Voodoo Doll": "Sur un siège en cuir brun en face des chambres près des escaliers du grenier (deuxième étage)"
+                },
+                "Brownstone High School": {
+                    "Tarot Cards": "Sur un long banc en bois à votre gauche dans le hall à côté d'un livre vert",
+                    "Ouija Board": "Au sol à côté d'un pilier à gauche où le hall rejoint le couloir",
+                    "Music Box": "Sur un long banc en bois du côté droit du hall parmi les livres verts",
+                    "Monkey Paw": "Sur le dessus d'une boîte en carton du côté droit du hall à côté d'un pilier en brique",
+                    "Haunted Mirror": "Appuyé contre un pilier en brique du côté droit du hall",
+                    "Summoning Circle": "Au sol au centre du couloir où le hall se joint",
+                    "Voodoo Doll": "Sur un banc en bois au mur en face de l'entrée"
+                },
+                "Camp Woodwind": {
+                    "Tarot Cards": "Sur la table de pique-nique la plus à gauche à côté de deux livres bleus",
+                    "Ouija Board": "À l'intérieur de la tente blanche avec des jeux extérieurs sur la table (côté droit)",
+                    "Music Box": "À l'intérieur de la tente jaune sur une petite table blanche (côté gauche)",
+                    "Monkey Paw": "Sur une plateforme en bois à côté de la tente violette avec des guimauves sur des bâtons",
+                    "Haunted Mirror": "Au sol à côté de l'arbre de lumières féeriques et du plateau de cornhole (centre)",
+                    "Summoning Circle": "Au sol au centre de la tente blanche avec de la nourriture et des boissons",
+                    "Voodoo Doll": "Au sol à côté de la plus petite tente bleue à gauche de la grande tente rouge"
+                },
+                "Edgefield Road": {
+                    "Tarot Cards": "Sur la commode blanche à votre droite en entrant à côté du plat vert",
+                    "Ouija Board": "Au sol dans la buanderie (coin arrière-gauche du premier étage)",
+                    "Music Box": "Sur la commode blanche dans le salon à côté du bol vert et de la lampe",
+                    "Monkey Paw": "Sur la table à langer bleue et rose dans la chambre orange (deuxième étage)",
+                    "Haunted Mirror": "Accroché au mur à côté des escaliers en entrant",
+                    "Summoning Circle": "Au sous-sol entre les piles d'étagères",
+                    "Voodoo Doll": "Sur le lit dans la chambre bleue (deuxième étage, à gauche en haut des escaliers)"
+                },
+                "Grafton Farmhouse": {
+                    "Monkey Paw": "Sur une table dans la salle à manger (premier étage, tout droit depuis l'entrée)",
+                    "Tarot Cards": "Sur un bureau dans la bibliothèque (premier étage, à travers la salle à manger, porte de gauche obscurcie par une grande étagère)",
+                    "Voodoo Doll": "Sur une table dans l'atelier de couture (premier étage, à droite de la salle à manger)",
+                    "Summoning Circle": "Au sol dans la salle des poupées (deuxième étage, à droite des escaliers, bout du couloir)",
+                    "Haunted Mirror": "Sur une table dans la chambre principale (deuxième étage, à gauche des escaliers, bout du couloir)",
+                    "Music Box": "Sur une table d'appoint dans la petite chambre (deuxième étage, à droite des escaliers, à travers la porte)",
+                    "Ouija Board": "Au sol dans le grenier (troisième étage, escaliers du deuxième étage petite chambre)"
+                },
+                "Maple Lodge Campsite": {
+                    "Tarot Cards": "Sur une petite table métallique à l'extérieur de la tente blanche (chemin Nord) à côté d'une gourde rouge",
+                    "Ouija Board": "Sur une étagère dans le placard de nettoyage (centre du bloc sanitaire)",
+                    "Music Box": "Sur une petite table métallique à l'extérieur de la porte principale de la cabane en rondins",
+                    "Monkey Paw": "Sur une chaise de camping bleue au bout de la jetée",
+                    "Haunted Mirror": "Au sol à l'intérieur de la tente bleue (côté gauche en entrant)",
+                    "Summoning Circle": "Au sol dans le salon de la cabane en rondins",
+                    "Voodoo Doll": "À côté de la bûche entourant le feu de camp (côté gauche de la carte)"
+                },
+                "Prison": {
+                    "Tarot Cards": "À l'intérieur d'une boîte plastique grise sur le bureau au poste de contrôle de sécurité",
+                    "Ouija Board": "Au sol derrière les bureaux au poste de contrôle de sécurité",
+                    "Music Box": "À l'intérieur de la boîte plastique grise de gauche sur le bureau avec deux boîtes (zone de sécurité)",
+                    "Monkey Paw": "Sur le bureau à côté du grand scanner, à droite de la boîte plastique grise",
+                    "Haunted Mirror": "Sous les chaises blanches dans l'entrée principale",
+                    "Summoning Circle": "Au sol au bout du couloir d'entrée à côté des chaises blanches",
+                    "Voodoo Doll": "Sur le bureau à côté du scanner rouge, à gauche de la boîte plastique grise"
+                },
+                "Ridgeview Court": {
+                    "Tarot Cards": "Sur la commode blanche à votre droite en entrant, à droite du bol vert",
+                    "Ouija Board": "Sur les étagères dans le placard utilitaire (à travers la salle à manger, porte de gauche)",
+                    "Music Box": "Sur la commode près de la porte dans la chambre la plus éloignée des escaliers (deuxième étage)",
+                    "Monkey Paw": "Sur le bureau blanc avec un ordinateur portable et un livre vert (deuxième étage coin droit)",
+                    "Haunted Mirror": "Au-dessus de la commode au mur en face des escaliers du sous-sol",
+                    "Summoning Circle": "Au sous-sol directement en face de la porte",
+                    "Voodoo Doll": "Sur le banc à coussin bleu à côté du piano dans le bureau en face du garage"
+                },
+                "Sunny Meadows": {
+                    "Tarot Cards": "Dans le cercle rouge sur la zone surélevée la plus proche des balustrades (chapelle)",
+                    "Ouija Board": "Au sol près des balustrades les plus éloignées de la porte (zone supérieure de la chapelle)",
+                    "Music Box": "Au sol devant les chandeliers en bois (chapelle arrière-gauche)",
+                    "Monkey Paw": "À la base du poteau métallique rouge au centre de la terrasse supérieure (chapelle)",
+                    "Haunted Mirror": "Dans le cercle rouge devant les chandeliers (chapelle bas-droite)",
+                    "Summoning Circle": "Dans le grand cercle rouge au centre de la terrasse supérieure (chapelle)",
+                    "Voodoo Doll": "Au sol dans le sang devant le poteau métallique rouge (chapelle)"
+                },
+                "Tanglewood Drive": {
+                    "Tarot Cards": "Sur une petite table ronde près de la fenêtre dans le salon près de la TV",
+                    "Ouija Board": "Sur une petite table en bois dans le coin arrière du sous-sol",
+                    "Music Box": "Sur une étagère à côté de l'ourson près de la porte de la nursery (à gauche de l'entrée)",
+                    "Monkey Paw": "À l'intérieur du grand placard blanc dans la zone salle à manger",
+                    "Haunted Mirror": "Au mur à côté de la porte de chambre près du salon",
+                    "Summoning Circle": "Au centre de la pièce du sous-sol (tournez à droite)",
+                    "Voodoo Doll": "Sur le couvercle du bac de rangement plastique le plus proche du coin (garage)"
+                },
+                "Willow Street": {
+                    "Tarot Cards": "Sur une petite table ronde à côté de la télécommande TV près du canapé (à droite en entrant)",
+                    "Ouija Board": "Sur le dessus de la machine à laver dans la petite buanderie (pièce latérale du garage)",
+                    "Music Box": "Sur la commode blanche avec plante (à gauche dans le salon depuis la porte d'entrée)",
+                    "Monkey Paw": "Dans le placard blanc dans le couloir avant les chambres (premier étage)",
+                    "Haunted Mirror": "Au sol dans la petite pièce latérale du garage (côté droit)",
+                    "Summoning Circle": "Au sous-sol à côté du mannequin devant la première porte",
+                    "Voodoo Doll": "Sur l'étagère du bas du placard blanc dans la chambre au bout du couloir droit"
+                }
+            }
+        };
+
+        // Ghost data with evidence
+        const ghosts = [
+            { name: "Spirit", evidence: ["emf", "spiritbox", "writing"] },
+            { name: "Wraith", evidence: ["emf", "spiritbox", "dots"] },
+            { name: "Phantom", evidence: ["spiritbox", "uv", "dots"] },
+            { name: "Poltergeist", evidence: ["spiritbox", "uv", "writing"] },
+            { name: "Banshee", evidence: ["uv", "orbs", "dots"] },
+            { name: "Jinn", evidence: ["emf", "uv", "freezing"] },
+            { name: "Mare", evidence: ["spiritbox", "orbs", "writing"] },
+            { name: "Revenant", evidence: ["orbs", "writing", "freezing"] },
+            { name: "Shade", evidence: ["emf", "writing", "freezing"] },
+            { name: "Demon", evidence: ["uv", "writing", "freezing"] },
+            { name: "Yurei", evidence: ["orbs", "freezing", "dots"] },
+            { name: "Oni", evidence: ["emf", "freezing", "dots"] },
+            { name: "Yokai", evidence: ["spiritbox", "orbs", "dots"] },
+            { name: "Hantu", evidence: ["uv", "orbs", "freezing"] },
+            { name: "Goryo", evidence: ["emf", "uv", "dots"] },
+            { name: "Myling", evidence: ["emf", "uv", "writing"] },
+            { name: "Onryo", evidence: ["spiritbox", "orbs", "freezing"] },
+            { name: "The Twins", evidence: ["emf", "spiritbox", "freezing"] },
+            { name: "Raiju", evidence: ["emf", "orbs", "dots"] },
+            { name: "Obake", evidence: ["emf", "uv", "orbs"] },
+            { name: "The Mimic", evidence: ["spiritbox", "uv", "freezing"] },
+            { name: "Moroi", evidence: ["spiritbox", "writing", "freezing"] },
+            { name: "Deogen", evidence: ["spiritbox", "writing", "dots"] },
+            { name: "Thaye", evidence: ["orbs", "writing", "dots"] }
+        ];
+
+        const ghostTranslations = {
+            en: {
+                "Spirit": {
+                    description: "Most common type of ghost. They are very territorial and will attack if you stay in the same area.",
+                    strengths: "Nothing in particular.",
+                    weaknesses: "Spirit Box stops all paranormal activity for a short time when used.",
+                    tips: "Use Smudge Sticks to prevent hunts for 3 minutes (longest of all ghosts).",
+                    hunting: "Normal hunting threshold at 50% average sanity."
+                },
+                "Wraith": {
+                    description: "Incorporeal ghost that can travel through walls and rarely touches the ground.",
+                    strengths: "Cannot be tracked by footsteps and has no UV footprints.",
+                    weaknesses: "Toxic reaction to Salt - will stop all activity if it steps in salt.",
+                    tips: "Place salt around potential ghost locations to identify or deter.",
+                    hunting: "Normal hunting threshold but can teleport to players anywhere on the map."
+                },
+                "Phantom": {
+                    description: "Feared for their ability to lower sanity and become nearly invisible during hunts.",
+                    strengths: "Looking at a Phantom will drop sanity considerably faster.",
+                    weaknesses: "Taking a photo of the Phantom will make it disappear temporarily.",
+                    tips: "Use cameras frequently to disrupt the ghost and get evidence photos.",
+                    hunting: "Becomes nearly invisible during hunts, only appearing briefly."
+                },
+                "Poltergeist": {
+                    description: "Known to manipulate objects around them to spread fear and terrorize their victims.",
+                    strengths: "Can throw multiple objects at once, massive sanity drop when throwing objects.",
+                    weaknesses: "Becomes powerless in rooms with no throwable objects nearby.",
+                    tips: "Empty rooms of objects to reduce poltergeist power.",
+                    hunting: "Normal threshold but extremely dangerous in cluttered rooms."
+                },
+                "Banshee": {
+                    description: "Territorial ghost that will attack only one person at a time until they leave or die.",
+                    strengths: "Will target one specific player ignoring others until target is dead or gone.",
+                    weaknesses: "Will be less aggressive if the target player is far away.",
+                    tips: "Target player should stay away while others investigate.",
+                    hunting: "Hunts based on target's sanity only, not average team sanity."
+                },
+                "Jinn": {
+                    description: "Territorial ghost that will attack only one person at a time until they leave or die.",
+                    strengths: "Will target one specific player ignoring others until target is dead or gone.",
+                    weaknesses: "Will be less aggressive if the target player is far away.",
+                    tips: "Target player should stay away while others investigate.",
+                    hunting: "Hunts based on target's sanity only, not average team sanity."
+                },
+                "Mare": {
+                    description: "Source of all nightmares, making it most powerful in the dark.",
+                    strengths: "Increased chance to hunt in dark areas, will turn off lights and break bulbs.",
+                    weaknesses: "Less likely to hunt when lights are on, will not turn on lights.",
+                    tips: "Keep lights on to reduce hunting chance and activity.",
+                    hunting: "60% hunt threshold in dark, 40% in light."
+                },
+                "Revenant": {
+                    description: "Violent ghost that will relentlessly hunt down their prey.",
+                    strengths: "Moves significantly faster when hunting if it knows where you are.",
+                    weaknesses: "Very slow when it doesn't know where players are.",
+                    tips: "Break line of sight and hide when it's hunting.",
+                    hunting: "Extremely fast when chasing, extremely slow when searching."
+                },
+                "Shade": {
+                    description: "Shy ghost that is harder to find evidence from and less likely to hunt in groups.",
+                    strengths: "Harder to find and much less active when people are nearby.",
+                    weaknesses: "Will not hunt if players are grouped together (except in cursed hunts).",
+                    tips: "Investigate alone to get more activity and evidence.",
+                    hunting: "Will not hunt if multiple people are in the ghost room."
+                },
+                "Demon": {
+                    description: "Most aggressive ghost type that hunts frequently and asks for less provocation.",
+                    strengths: "Can hunt at any sanity level, asks less questions on Ouija Board.",
+                    weaknesses: "Smudging will prevent it from hunting for longer than other ghosts.",
+                    tips: "Bring extra smudge sticks as protection, be ready to run frequently.",
+                    hunting: "Can hunt at any sanity but usually starts around 70%."
+                },
+                "Yurei": {
+                    description: "Returned from the dead and is known to have a stronger effect on people's sanity.",
+                    strengths: "Stronger sanity drain effect when manifesting or during events.",
+                    weaknesses: "Smudging the ghost will prevent it from wandering for extended period.",
+                    tips: "Watch sanity carefully and smudge in ghost room to trap it.",
+                    hunting: "Normal hunt threshold but dangerous due to sanity drain."
+                },
+                "Oni": {
+                    description: "Cousin to the Demon, more active when people are around and can move objects at great speed.",
+                    strengths: "More active when players are nearby, can move objects very fast.",
+                    weaknesses: "Less active when players are far away, easier to track due to activity.",
+                    tips: "Look for fast-moving objects and high activity when investigating.",
+                    hunting: "Very active, making it easier to identify but more dangerous."
+                },
+                "Yokai": {
+                    description: "Common ghost attracted to human voices, becoming more active near talking.",
+                    strengths: "Talking near it will anger it and increase activity and hunt chance.",
+                    weaknesses: "Can only hear players during hunts when they are very close.",
+                    tips: "Stay quiet during investigation and especially during hunts.",
+                    hunting: "Can hunt at higher sanity when players talk, but has very short hearing range."
+                },
+                "Hantu": {
+                    description: "Rare ghost that thrives in colder climates and will move faster in cold areas.",
+                    strengths: "Moves faster in cold areas, can turn off the breaker and create freezing breath.",
+                    weaknesses: "Moves slower in warm areas, cannot turn the breaker back on.",
+                    tips: "Turn the breaker on and monitor temperature changes.",
+                    hunting: "Fast in cold, slow in warm, visible freezing breath in cold areas."
+                },
+                "Goryo": {
+                    description: "Rarely shows itself to humans, making it particularly difficult to track and identify.",
+                    strengths: "Can only show D.O.T.S evidence when no players are in the room.",
+                    weaknesses: "Will not change rooms often, rarely shows itself on camera outside ghost room.",
+                    tips: "Set up D.O.T.S in empty rooms and monitor from elsewhere.",
+                    hunting: "Rarely leaves its room, making it predictable but secretive."
+                },
+                "Myling": {
+                    description: "Very quiet ghost known for their silence when hunting and paranormal sounds only when close.",
+                    strengths: "Quieter footsteps and vocalizations during hunts.",
+                    weaknesses: "Makes paranormal sounds (through parabolic microphone) more frequently.",
+                    tips: "Use parabolic microphone to detect it, listen carefully during hunts.",
+                    hunting: "Very quiet during hunts, making it hard to track by sound."
+                },
+                "Onryo": {
+                    description: "Vengeful ghost that has been known to be placated by flames, and will attack when flames go out.",
+                    strengths: "Can hunt at higher sanity when flames are extinguished in the ghost room.",
+                    weaknesses: "Threatened by flames and less likely to hunt near fire sources.",
+                    tips: "Keep candles, lighters, or campfire burning in ghost room.",
+                    hunting: "Higher hunt chance when flames die out, deterred by active flames."
+                },
+                "The Twins": {
+                    description: "Ghosts that have been split into two. They often work together to surprise their victims.",
+                    strengths: "Can interact from two different locations, one twin faster, one slower.",
+                    weaknesses: "Either half can be tracked separately, confusing evidence.",
+                    tips: "Look for interactions happening in different areas simultaneously.",
+                    hunting: "Two different hunt speeds depending on which twin is hunting."
+                },
+                "Raiju": {
+                    description: "Ghost that thrives on electrical current and will disrupt electronic equipment when hunting.",
+                    strengths: "Moves faster near active electrical equipment during hunts.",
+                    weaknesses: "Disrupts electronic equipment from farther away, making it easier to detect.",
+                    tips: "Turn off electronics during hunts, monitor equipment malfunctions.",
+                    hunting: "Faster near electronics, disrupts equipment from 15m away instead of 10m."
+                },
+                "Obake": {
+                    description: "Terrifying shapeshifter known for leaving different fingerprint patterns.",
+                    strengths: "Can leave six-fingered handprints and has a chance to not leave fingerprints.",
+                    weaknesses: "Sometimes shows unique six-fingered prints, doesn't always show UV evidence.",
+                    tips: "Look for unusual fingerprint patterns and document all UV evidence.",
+                    hunting: "Can shapeshift during hunts, making identification harder."
+                },
+                "The Mimic": {
+                    description: "Copycat ghost that mimics traits and behaviors of other ghost types.",
+                    strengths: "Can mimic other ghost abilities and traits, has fake Ghost Orbs as 4th evidence.",
+                    weaknesses: "Always has Ghost Orbs as forced 4th evidence, revealing its identity.",
+                    tips: "If you find 4 pieces of evidence, it's always The Mimic.",
+                    hunting: "Copies behavior of other ghosts but always shows 4 evidence pieces."
+                },
+                "Moroi": {
+                    description: "Cursed ghost that gains speed as sanity drops and places curses through Spirit Box.",
+                    strengths: "Moves faster at lower sanity, curses players through Spirit Box responses.",
+                    weaknesses: "Smudging slows the Moroi down temporarily during hunts.",
+                    tips: "Be careful with Spirit Box usage, use smudge sticks during hunts.",
+                    hunting: "Gets faster as average sanity drops, can be slowed with smudging."
+                },
+                "Deogen": {
+                    description: "Always knows where you are but moves slower when close to players.",
+                    strengths: "Always knows player locations, cannot be hidden from.",
+                    weaknesses: "Moves slower when near players, very slow at close range.",
+                    tips: "Don't try to hide, instead get close and walk around it during hunts.",
+                    hunting: "Fast from afar, very slow up close, always knows where players are."
+                },
+                "Thaye": {
+                    description: "Gets more active and dangerous the longer you stay, but also ages over time.",
+                    strengths: "Starts very active and fast, more likely to hunt early.",
+                    weaknesses: "Ages over time, becoming slower and less active as rounds progress.",
+                    tips: "Be extra careful early in the investigation, gets easier over time.",
+                    hunting: "Very active and fast initially, becomes much slower as it ages."
+                }
+            },
+            fr: {
+                "Spirit": {
+                    description: "Type de fantôme le plus commun. Ils sont très territoriaux et attaqueront si vous restez dans la même zone.",
+                    strengths: "Rien de particulier.",
+                    weaknesses: "La Spirit Box arrête toute activité paranormale pendant un court moment lorsqu'elle est utilisée.",
+                    tips: "Utilisez des bâtons d'encens pour empêcher les chasses pendant 3 minutes (le plus long de tous les fantômes).",
+                    hunting: "Seuil de chasse normal à 50% de sanité moyenne."
+                },
+                "Wraith": {
+                    description: "Fantôme incorporel qui peut traverser les murs et touche rarement le sol.",
+                    strengths: "Ne peut pas être suivi par les empreintes et n'a pas d'empreintes UV.",
+                    weaknesses: "Réaction toxique au sel - arrêtera toute activité s'il marche dans le sel.",
+                    tips: "Placez du sel autour des emplacements potentiels du fantôme pour l'identifier ou le dissuader.",
+                    hunting: "Seuil de chasse normal mais peut se téléporter vers les joueurs n'importe où sur la carte."
+                },
+                "Phantom": {
+                    description: "Craint pour sa capacité à réduire la sanité et à devenir presque invisible pendant les chasses.",
+                    strengths: "Regarder un Phantom fera chuter la sanité considérablement plus vite.",
+                    weaknesses: "Prendre une photo du Phantom le fera disparaître temporairement.",
+                    tips: "Utilisez les caméras fréquemment pour perturber le fantôme et obtenir des photos de preuves.",
+                    hunting: "Devient presque invisible pendant les chasses, n'apparaissant que brièvement."
+                },
+                "Poltergeist": {
+                    description: "Connu pour manipuler les objets autour d'eux pour répandre la peur et terroriser leurs victimes.",
+                    strengths: "Peut lancer plusieurs objets à la fois, chute massive de sanité en lançant des objets.",
+                    weaknesses: "Devient impuissant dans les pièces sans objets jetables à proximité.",
+                    tips: "Videz les pièces des objets pour réduire le pouvoir du poltergeist.",
+                    hunting: "Seuil normal mais extrêmement dangereux dans les pièces encombrées."
+                },
+                "Banshee": {
+                    description: "Fantôme territorial qui n'attaquera qu'une seule personne à la fois jusqu'à ce qu'elle parte ou meure.",
+                    strengths: "Ciblera un joueur spécifique en ignorant les autres jusqu'à ce que la cible soit morte ou partie.",
+                    weaknesses: "Sera moins agressif si le joueur ciblé est loin.",
+                    tips: "Le joueur ciblé devrait rester à l'écart pendant que les autres enquêtent.",
+                    hunting: "Chasse basée uniquement sur la sanité de la cible, pas sur la sanité moyenne de l'équipe."
+                },
+                "Jinn": {
+                    description: "Fantôme qui tire sa puissance de l'électricité et se déplace plus rapidement quand le disjoncteur est allumé.",
+                    strengths: "Se déplace plus vite quand le disjoncteur est allumé, peut réduire la sanité à distance.",
+                    weaknesses: "Ne peut pas éteindre le disjoncteur et se déplace plus lentement quand il est éteint.",
+                    tips: "Éteignez le disjoncteur pour ralentir le fantôme pendant les chasses.",
+                    hunting: "Plus rapide avec l'électricité, plus lent sans électricité."
+                },
+                "Mare": {
+                    description: "Source de tous les cauchemars, ce qui le rend plus puissant dans l'obscurité.",
+                    strengths: "Chance accrue de chasser dans les zones sombres, éteindra les lumières et cassera les ampoules.",
+                    weaknesses: "Moins susceptible de chasser quand les lumières sont allumées, n'allumera pas les lumières.",
+                    tips: "Gardez les lumières allumées pour réduire les chances de chasse et l'activité.",
+                    hunting: "60% de seuil de chasse dans l'obscurité, 40% dans la lumière."
+                },
+                "Revenant": {
+                    description: "Fantôme violent qui chassera implacablement sa proie.",
+                    strengths: "Se déplace considérablement plus vite en chassant s'il sait où vous êtes.",
+                    weaknesses: "Très lent quand il ne sait pas où sont les joueurs.",
+                    tips: "Cassez la ligne de vue et cachez-vous quand il chasse.",
+                    hunting: "Extrêmement rapide en poursuivant, extrêmement lent en cherchant."
+                },
+                "Shade": {
+                    description: "Fantôme timide qui est plus difficile à trouver des preuves et moins susceptible de chasser en groupes.",
+                    strengths: "Plus difficile à trouver et beaucoup moins actif quand les gens sont à proximité.",
+                    weaknesses: "Ne chassera pas si les joueurs sont regroupés (sauf dans les chasses maudites).",
+                    tips: "Enquêtez seul pour obtenir plus d'activité et de preuves.",
+                    hunting: "Ne chassera pas si plusieurs personnes sont dans la pièce du fantôme."
+                },
+                "Demon": {
+                    description: "Type de fantôme le plus agressif qui chasse fréquemment et demande moins de provocation.",
+                    strengths: "Peut chasser à n'importe quel niveau de sanité, pose moins de questions sur la planche Ouija.",
+                    weaknesses: "L'encensement l'empêchera de chasser plus longtemps que les autres fantômes.",
+                    tips: "Apportez des bâtons d'encens supplémentaires comme protection, soyez prêt à courir fréquemment.",
+                    hunting: "Peut chasser à n'importe quelle sanité mais commence généralement autour de 70%."
+                },
+                "Yurei": {
+                    description: "Revenu d'entre les morts et connu pour avoir un effet plus fort sur la sanité des gens.",
+                    strengths: "Effet de drain de sanité plus fort lors de manifestations ou d'événements.",
+                    weaknesses: "Encenser le fantôme l'empêchera d'errer pendant une période prolongée.",
+                    tips: "Surveillez attentivement la sanité et encensez dans la pièce du fantôme pour le piéger.",
+                    hunting: "Seuil de chasse normal mais dangereux à cause du drain de sanité."
+                },
+                "Oni": {
+                    description: "Cousin du Démon, plus actif quand les gens sont autour et peut déplacer les objets à grande vitesse.",
+                    strengths: "Plus actif quand les joueurs sont à proximité, peut déplacer les objets très rapidement.",
+                    weaknesses: "Moins actif quand les joueurs sont loin, plus facile à suivre à cause de l'activité.",
+                    tips: "Cherchez des objets qui bougent rapidement et une forte activité lors de l'enquête.",
+                    hunting: "Très actif, ce qui le rend plus facile à identifier mais plus dangereux."
+                },
+                "Yokai": {
+                    description: "Fantôme commun attiré par les voix humaines, devenant plus actif près des discussions.",
+                    strengths: "Parler près de lui le mettra en colère et augmentera l'activité et les chances de chasse.",
+                    weaknesses: "Ne peut entendre les joueurs pendant les chasses que quand ils sont très proches.",
+                    tips: "Restez silencieux pendant l'enquête et surtout pendant les chasses.",
+                    hunting: "Peut chasser à une sanité plus élevée quand les joueurs parlent, mais a une portée d'audition très courte."
+                },
+                "Hantu": {
+                    description: "Fantôme rare qui prospère dans les climats froids et se déplacera plus vite dans les zones froides.",
+                    strengths: "Se déplace plus vite dans les zones froides, peut éteindre le disjoncteur et créer une respiration glaciale.",
+                    weaknesses: "Se déplace plus lentement dans les zones chaudes, ne peut pas rallumer le disjoncteur.",
+                    tips: "Allumez le disjoncteur et surveillez les changements de température.",
+                    hunting: "Rapide dans le froid, lent dans la chaleur, respiration glaciale visible dans les zones froides."
+                },
+                "Goryo": {
+                    description: "Se montre rarement aux humains, ce qui le rend particulièrement difficile à suivre et identifier.",
+                    strengths: "Ne peut montrer les preuves D.O.T.S que quand aucun joueur n'est dans la pièce.",
+                    weaknesses: "Ne changera pas souvent de pièce, se montre rarement sur caméra en dehors de sa pièce.",
+                    tips: "Installez les D.O.T.S dans des pièces vides et surveillez depuis ailleurs.",
+                    hunting: "Quitte rarement sa pièce, ce qui le rend prévisible mais secret."
+                },
+                "Myling": {
+                    description: "Fantôme très silencieux connu pour son silence lors des chasses et les sons paranormaux seulement quand proche.",
+                    strengths: "Pas de bruits et vocalisations plus silencieux pendant les chasses.",
+                    weaknesses: "Fait des sons paranormaux (via microphone parabolique) plus fréquemment.",
+                    tips: "Utilisez le microphone parabolique pour le détecter, écoutez attentivement pendant les chasses.",
+                    hunting: "Très silencieux pendant les chasses, ce qui le rend difficile à suivre par le son."
+                },
+                "Onryo": {
+                    description: "Fantôme vengeur qui est connu pour être apaisé par les flammes, et attaquera quand les flammes s'éteignent.",
+                    strengths: "Peut chasser à une sanité plus élevée quand les flammes s'éteignent dans la pièce du fantôme.",
+                    weaknesses: "Menacé par les flammes et moins susceptible de chasser près des sources de feu.",
+                    tips: "Gardez des bougies, briquets, ou feu de camp allumés dans la pièce du fantôme.",
+                    hunting: "Chance de chasse plus élevée quand les flammes s'éteignent, dissuadé par les flammes actives."
+                },
+                "The Twins": {
+                    description: "Fantômes qui ont été séparés en deux. Ils travaillent souvent ensemble pour surprendre leurs victimes.",
+                    strengths: "Peut interagir depuis deux emplacements différents, un jumeau plus rapide, un plus lent.",
+                    weaknesses: "Chaque moitié peut être suivie séparément, preuves confuses.",
+                    tips: "Cherchez des interactions se produisant dans différentes zones simultanément.",
+                    hunting: "Deux vitesses de chasse différentes selon le jumeau qui chasse."
+                },
+                "Raiju": {
+                    description: "Fantôme qui prospère sur le courant électrique et perturbera l'équipement électronique lors des chasses.",
+                    strengths: "Se déplace plus vite près d'équipements électriques actifs pendant les chasses.",
+                    weaknesses: "Perturbe l'équipement électronique de plus loin, ce qui le rend plus facile à détecter.",
+                    tips: "Éteignez l'électronique pendant les chasses, surveillez les dysfonctionnements d'équipement.",
+                    hunting: "Plus rapide près de l'électronique, perturbe l'équipement depuis 15m au lieu de 10m."
+                },
+                "Obake": {
+                    description: "Métamorphe terrifiant connu pour laisser différents motifs d'empreintes digitales.",
+                    strengths: "Peut laisser des empreintes à six doigts et a une chance de ne pas laisser d'empreintes.",
+                    weaknesses: "Montre parfois des empreintes uniques à six doigts, ne montre pas toujours les preuves UV.",
+                    tips: "Cherchez des motifs d'empreintes inhabituels et documentez toutes les preuves UV.",
+                    hunting: "Peut se métamorphoser pendant les chasses, rendant l'identification plus difficile."
+                },
+                "The Mimic": {
+                    description: "Fantôme imitateur qui mime les traits et comportements d'autres types de fantômes.",
+                    strengths: "Peut imiter les capacités et traits d'autres fantômes, a de fausses Orbes Spectraux comme 4e preuve.",
+                    weaknesses: "A toujours les Orbes Spectraux comme 4e preuve forcée, révélant son identité.",
+                    tips: "Si vous trouvez 4 pièces de preuve, c'est toujours The Mimic.",
+                    hunting: "Copie le comportement d'autres fantômes mais montre toujours 4 pièces de preuve."
+                },
+                "Moroi": {
+                    description: "Fantôme maudit qui gagne en vitesse quand la sanité baisse et place des malédictions via Spirit Box.",
+                    strengths: "Se déplace plus vite à sanité basse, maudit les joueurs via les réponses Spirit Box.",
+                    weaknesses: "L'encensement ralentit temporairement le Moroi pendant les chasses.",
+                    tips: "Attention avec l'utilisation de Spirit Box, utilisez des bâtons d'encens pendant les chasses.",
+                    hunting: "Devient plus rapide quand la sanité moyenne baisse, peut être ralenti avec l'encensement."
+                },
+                "Deogen": {
+                    description: "Sait toujours où vous êtes mais se déplace plus lentement quand proche des joueurs.",
+                    strengths: "Connaît toujours les emplacements des joueurs, impossible de s'en cacher.",
+                    weaknesses: "Se déplace plus lentement quand près des joueurs, très lent à courte portée.",
+                    tips: "N'essayez pas de vous cacher, approchez-vous plutôt et contournez-le pendant les chasses.",
+                    hunting: "Rapide de loin, très lent de près, connaît toujours où sont les joueurs."
+                },
+                "Thaye": {
+                    description: "Devient plus actif et dangereux plus vous restez longtemps, mais vieillit aussi avec le temps.",
+                    strengths: "Commence très actif et rapide, plus susceptible de chasser tôt.",
+                    weaknesses: "Vieillit avec le temps, devenant plus lent et moins actif au fil des rounds.",
+                    tips: "Soyez très prudent au début de l'enquête, devient plus facile avec le temps.",
+                    hunting: "Très actif et rapide initialement, devient beaucoup plus lent en vieillissant."
+                }
+            }
+        };
+
+        // Initialize the app
+        function init() {
+            populateGhostGrid();
+            populateMapGrid();
+            updateLanguage();
         }
 
-        setInterval(randomFlicker, 1000);
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
 
-        // Occasional static burst
-        function staticBurst() {
-            const noise = document.querySelector('.noise');
-            if (Math.random() < 0.05) {
-                noise.style.opacity = '0.3';
-                setTimeout(() => {
-                    noise.style.opacity = '0.03';
-                }, 100);
-            }
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
         }
 
-        setInterval(staticBurst, 500);
+        function toggleEvidence(element, evidenceType) {
+            element.classList.toggle('selected');
+
+            if (selectedEvidence.includes(evidenceType)) {
+                selectedEvidence = selectedEvidence.filter(e => e !== evidenceType);
+            } else {
+                selectedEvidence.push(evidenceType);
+            }
+
+            updateGhostResult();
+        }
+
+        function clearEvidence() {
+            selectedEvidence = [];
+            const evidenceItems = document.querySelectorAll('.evidence-item');
+            evidenceItems.forEach(item => item.classList.remove('selected'));
+            updateGhostResult();
+        }
+
+        function updateGhostResult() {
+            const resultDiv = document.getElementById('ghostResult');
+
+            if (selectedEvidence.length === 0) {
+                resultDiv.innerHTML = `<h3>${getTranslation('result-title')}</h3>`;
+                return;
+            }
+
+            // If 4 or more pieces of evidence are selected, it's automatically The Mimic
+            if (selectedEvidence.length >= 4) {
+                const mimic = ghosts.find(ghost => ghost.name === "The Mimic");
+                if (mimic) {
+                    resultDiv.innerHTML = `
+                        <h3>${getTranslation('ghost-identified')}:</h3>
+                        <div class="ghost-card" style="margin: 10px 0; text-align: left;">
+                            <h3 class="ghost-name">${mimic.name}</h3>
+                            <div class="evidence-list">
+                                ${mimic.evidence.map(ev => `<span class="evidence-badge">${getEvidenceName(ev)}</span>`).join('')}
+                                <span class="evidence-badge" style="background: #ff6b6b;">${getTranslation('evidence-orbs')} (${getTranslation('fourth-evidence')})</span>
+                            </div>
+                            <p style="margin-top: 10px;">${getGhostTranslation(mimic.name, 'description')}</p>
+                            <p style="margin-top: 10px; color: #ff6b6b;"><strong>${getTranslation('auto-identified')}:</strong> ${getTranslation('mimic-explanation')}</p>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            const possibleGhosts = ghosts.filter(ghost => {
+                return selectedEvidence.every(evidence => ghost.evidence.includes(evidence));
+            });
+
+            if (possibleGhosts.length === 0) {
+                resultDiv.innerHTML = `<h3>${getTranslation('no-match')}</h3>`;
+                return;
+            }
+
+            let html = `<h3>${getTranslation('possible-ghosts')}:</h3>`;
+            possibleGhosts.forEach(ghost => {
+                html += `
+                    <div class="ghost-card" style="margin: 10px 0; text-align: left;">
+                        <h3 class="ghost-name">${ghost.name}</h3>
+                        <div class="evidence-list">
+                            ${ghost.evidence.map(ev => `<span class="evidence-badge">${getEvidenceName(ev)}</span>`).join('')}
+                        </div>
+                        <p style="margin-top: 10px;">${getGhostTranslation(ghost.name, 'description')}</p>
+                    </div>
+                `;
+            });
+
+            resultDiv.innerHTML = html;
+        }
+
+        function getEvidenceName(evidenceKey) {
+            const evidenceNames = {
+                'emf': getTranslation('evidence-emf'),
+                'dots': getTranslation('evidence-dots'),
+                'uv': getTranslation('evidence-uv'),
+                'freezing': getTranslation('evidence-freezing'),
+                'orbs': getTranslation('evidence-orbs'),
+                'writing': getTranslation('evidence-writing'),
+                'spiritbox': getTranslation('evidence-spiritbox')
+            };
+            return evidenceNames[evidenceKey] || evidenceKey;
+        }
+
+        function getGhostTranslation(ghostName, field) {
+            if (ghostTranslations[currentLanguage] && ghostTranslations[currentLanguage][ghostName] && ghostTranslations[currentLanguage][ghostName][field]) {
+                return ghostTranslations[currentLanguage][ghostName][field];
+            }
+            return ghostTranslations['en'][ghostName] ? ghostTranslations['en'][ghostName][field] : '';
+        }
+
+        function populateGhostGrid() {
+            const ghostGrid = document.getElementById('ghostGrid');
+            ghostGrid.innerHTML = '';
+
+            ghosts.forEach(ghost => {
+                const ghostCard = document.createElement('div');
+                ghostCard.className = 'ghost-card';
+                ghostCard.innerHTML = `
+                    <h3 class="ghost-name">${ghost.name}</h3>
+                    <div class="ghost-section">
+                        <h4 data-translate="ghost-evidence">${getTranslation('ghost-evidence')}</h4>
+                        <div class="evidence-list">
+                            ${ghost.evidence.map(ev => `<span class="evidence-badge">${getEvidenceName(ev)}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="ghost-section">
+                        <h4 data-translate="ghost-description">${getTranslation('ghost-description')}</h4>
+                        <p>${getGhostTranslation(ghost.name, 'description')}</p>
+                    </div>
+                    <div class="ghost-section">
+                        <h4 data-translate="ghost-strengths">${getTranslation('ghost-strengths')}</h4>
+                        <p>${getGhostTranslation(ghost.name, 'strengths')}</p>
+                    </div>
+                    <div class="ghost-section">
+                        <h4 data-translate="ghost-weaknesses">${getTranslation('ghost-weaknesses')}</h4>
+                        <p>${getGhostTranslation(ghost.name, 'weaknesses')}</p>
+                    </div>
+                    <div class="ghost-section">
+                        <h4 data-translate="ghost-tips">${getTranslation('ghost-tips')}</h4>
+                        <p>${getGhostTranslation(ghost.name, 'tips')}</p>
+                    </div>
+                    <div class="ghost-section">
+                        <h4 data-translate="ghost-hunting">${getTranslation('ghost-hunting')}</h4>
+                        <p>${getGhostTranslation(ghost.name, 'hunting')}</p>
+                    </div>
+                `;
+                ghostGrid.appendChild(ghostCard);
+            });
+        }
+
+        function populateMapGrid() {
+            const mapGrid = document.getElementById('mapGrid');
+            mapGrid.innerHTML = '';
+
+            // Create cursed objects overview
+            const objectsCard = document.createElement('div');
+            objectsCard.className = 'map-card';
+            objectsCard.innerHTML = `
+                <h3 class="map-name">${getTranslation('cursed-object-types')}</h3>
+                <div class="cursed-objects">
+                    <div class="object-location">
+                        <h4><span class="object-type">Tarot Cards</span></h4>
+                        <p>${currentLanguage === 'fr' ? 'Effets aléatoires lors du tirage, peuvent être bénéfiques ou nuisibles' : 'Random effects when drawn, can be beneficial or harmful'}</p>
+                    </div>
+                    <div class="object-location">
+                        <h4><span class="object-type">Ouija Board</span></h4>
+                        <p>${currentLanguage === 'fr' ? 'Permet la communication avec le fantôme mais draine la sanité' : 'Allows communication with the ghost but drains sanity'}</p>
+                    </div>
+                    <div class="object-location">
+                        <h4><span class="object-type">Music Box</span></h4>
+                        <p>${currentLanguage === 'fr' ? 'Attire le fantôme quand joué, peut causer des chasses' : 'Attracts the ghost when played, can cause hunts'}</p>
+                    </div>
+                    <div class="object-location">
+                        <h4><span class="object-type">Monkey Paw</span></h4>
+                        <p>${currentLanguage === 'fr' ? 'Accorde des souhaits avec des conséquences dangereuses' : 'Grants wishes with dangerous consequences'}</p>
+                    </div>
+                    <div class="object-location">
+                        <h4><span class="object-type">Haunted Mirror</span></h4>
+                        <p>${currentLanguage === 'fr' ? 'Montre la pièce du fantôme quand utilisé, se casse et chasse à 0% de sanité' : 'Shows ghost room when used, breaks and hunts at 0% sanity'}</p>
+                    </div>
+                    <div class="object-location">
+                        <h4><span class="object-type">Summoning Circle</span></h4>
+                        <p>${currentLanguage === 'fr' ? 'Invoque le fantôme à l\'emplacement du cercle quand allumé' : 'Summons ghost to circle location when lit'}</p>
+                    </div>
+                    <div class="object-location">
+                        <h4><span class="object-type">Voodoo Doll</span></h4>
+                        <p>${currentLanguage === 'fr' ? 'Les épingles causent des interactions et une perte de sanité' : 'Pins cause interactions and sanity loss'}</p>
+                    </div>
+                </div>
+            `;
+            mapGrid.appendChild(objectsCard);
+
+            // Create tarot cards detail with enhanced information
+            const currentCards = currentLanguage === 'fr' && cursedObjectsTranslations.fr["Tarot Cards"] 
+                ? cursedObjectsTranslations.fr["Tarot Cards"] 
+                : cursedObjects["Tarot Cards"];
+
+            const tarotCard = document.createElement('div');
+            tarotCard.className = 'map-card';
+            tarotCard.innerHTML = `
+                <h3 class="map-name">${getTranslation('tarot-effects')}</h3>
+                <div class="tarot-cards">
+                    ${currentCards.effects.map(card => `
+                        <div class="tarot-card">
+                            <h4>${card.name}</h4>
+                            <p><strong>${getTranslation('effect')}:</strong> ${card.effect}</p>
+                            <div class="probability">${getTranslation('probability')} ${card.chance}</div>
+                            <div class="card-appearance">${getTranslation('card-appearance')} ${card.appearance}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            mapGrid.appendChild(tarotCard);
+
+            // Create map-specific location cards
+            const currentMapLocations = currentLanguage === 'fr' ? mapLocationsTranslations.fr : mapLocations;
+
+            Object.entries(currentMapLocations).forEach(([mapName, locations]) => {
+                const mapCard = document.createElement('div');
+                mapCard.className = 'map-card';
+                mapCard.innerHTML = `
+                    <h3 class="map-name">${mapName}</h3>
+                    <div class="cursed-locations">
+                        ${Object.entries(locations).map(([objectName, location]) => `
+                            <div class="object-location">
+                                <h4><span class="object-type">${objectName}</span></h4>
+                                <p>${location}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                mapGrid.appendChild(mapCard);
+            });
+        }
+
+        function searchGhosts() {
+            const searchTerm = document.getElementById('ghostSearch').value.toLowerCase();
+            const ghostCards = document.querySelectorAll('#ghostGrid .ghost-card');
+
+            ghostCards.forEach(card => {
+                const ghostName = card.querySelector('.ghost-name').textContent.toLowerCase();
+                const ghostText = card.textContent.toLowerCase();
+
+                if (ghostName.includes(searchTerm) || ghostText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function changeLanguage() {
+            const select = document.getElementById('languageSelect');
+            currentLanguage = select.value;
+            updateLanguage();
+        }
+
+        function getTranslation(key) {
+            return translations[currentLanguage] && translations[currentLanguage][key] ?
+                translations[currentLanguage][key] :
+                translations['en'][key] || key;
+        }
+
+        function updateLanguage() {
+            // Add missing translations
+            const additionalTranslations = {
+                en: {
+                    'ghost-identified': 'Identified Ghost',
+                    'fourth-evidence': '4th Evidence',
+                    'auto-identified': 'Auto-identified',
+                    'mimic-explanation': 'When 4+ evidence pieces are found, it\'s always The Mimic!',
+                    'no-match': 'No ghosts match this evidence combination',
+                    'possible-ghosts': 'Possible Ghosts',
+                    'effect': 'Effect',
+                    'probability': 'Draw chance:',
+                    'card-appearance': 'Card appearance:'
+                },
+                fr: {
+                    'ghost-identified': 'Fantôme Identifié',
+                    'fourth-evidence': '4e Preuve',
+                    'auto-identified': 'Auto-identifié',
+                    'mimic-explanation': 'Quand 4+ pièces de preuve sont trouvées, c\'est toujours The Mimic !',
+                    'no-match': 'Aucun fantôme ne correspond à cette combinaison de preuves',
+                    'possible-ghosts': 'Fantômes Possibles',
+                    'effect': 'Effet',
+                    'probability': 'Chance de tirage :',
+                    'card-appearance': 'Apparence de la carte :'
+                }
+            };
+
+            // Merge additional translations
+            Object.keys(additionalTranslations).forEach(lang => {
+                if (!translations[lang]) translations[lang] = {};
+                Object.assign(translations[lang], additionalTranslations[lang]);
+            });
+
+            // Update all elements with data-translate attribute
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                element.textContent = getTranslation(key);
+            });
+
+            // Update placeholder text
+            const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+            placeholderElements.forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                element.placeholder = getTranslation(key);
+            });
+
+            // Repopulate dynamic content with new language
+            populateGhostGrid();
+            populateMapGrid();
+            updateGhostResult();
+        }
+
+        // Initialize the app when page loads
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
+
 </html>
